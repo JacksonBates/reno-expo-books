@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import PrivateRoute from "./PrivateRoute";
+import { PrivateRoute, PublicRoute, SansMenuRoute } from "./routes";
 import { AuthContext } from "../context/auth";
 
 import Admin from "./Admin";
@@ -19,12 +19,6 @@ export default function App() {
     setAuthTokens(data);
   };
 
-  const logout = (e) => {
-    e.preventDefault();
-    setAuthTokens();
-    localStorage.removeItem("tokens");
-  };
-
   return (
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
       <Router>
@@ -34,9 +28,9 @@ export default function App() {
         <Route path="/signup">
           <Register />
         </Route>
-        <Route exact path="/">
+        <PublicRoute exact path="/">
           <Home />
-        </Route>
+        </PublicRoute>
         <PrivateRoute path="/admin">
           <Admin />
         </PrivateRoute>
