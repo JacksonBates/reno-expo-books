@@ -28,25 +28,6 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
       <Router>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home Page</Link>
-            </li>
-            <li>
-              <Link to="/admin">Admin Page</Link>
-            </li>
-            {!authTokens ? (
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-            ) : (
-              <li>
-                <button onClick={logout}>Logout</button>
-              </li>
-            )}
-          </ul>
-        </nav>
         <Route path="/login">
           <Login />
         </Route>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useAuth } from "../context/auth";
+import AppLayout from "./AppLayout";
 
 export default function PrivateRoute({ children, ...rest }) {
   const { authTokens } = useAuth();
@@ -8,7 +9,7 @@ export default function PrivateRoute({ children, ...rest }) {
   return (
     <Route {...rest}>
       {authTokens ? (
-        children
+        <AppLayout>{children}</AppLayout>
       ) : (
         <Redirect
           to={{ pathname: "/login", state: { referer: { ...rest }.path } }}
