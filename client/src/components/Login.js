@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, Redirect, useHistory } from "react-router-dom";
+import { Button, Form, Input, message } from "antd";
 import { useAuth } from "../context/auth";
 import { login } from "../helpers/api";
 
@@ -12,15 +13,15 @@ export default function Login(props) {
 
   const referer = history?.location?.state?.referer || "/";
 
-  const postLogin = (e) => {
-    e.preventDefault();
+  const postLogin = () => {
     login({ username, password })
       .then((response) => {
         if (response.accessToken) {
           setAuthTokens(response.accessToken);
           setLoggedIn(true);
+          message.success("Login successful!", 3);
         } else {
-          console.error(response.reason);
+          message.error(response.reason, 3);
         }
       })
       .catch((error) => {
@@ -31,27 +32,33 @@ export default function Login(props) {
   if (isLoggedIn) return <Redirect to={referer} />;
 
   return (
-    <div>
-      <form onSubmit={postLogin}>
-        <label htmlFor="username">Username: </label>
-        <input
-          name="username"
-          type="text"
-          placeholder="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <label htmlFor="password">Password: </label>
-        <input
-          name="password"
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Sign In</button>
-      </form>
+    <React.Fragment>
+      <Form onFinish={postLogin}>
+        <Form.Item label="Username: ">
+          <Input
+            name="username"
+            type="text"
+            placeholder="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item label="Password: ">
+          <Input
+            name="password"
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item>
+          <Button htmlType="submit" type="primary">
+            Sign In
+          </Button>
+        </Form.Item>
+      </Form>
       <Link to="/signup">Don't have an account?</Link>
-    </div>
+    </React.Fragment>
   );
 }

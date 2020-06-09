@@ -1,44 +1,52 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { register } from "../helpers/api";
+import { Button, Form, Input, message } from "antd";
 
 export default function Register() {
+  const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const postRegistration = (e) => {
-    e.preventDefault();
+  const postRegistration = () => {
     register({ username, password }).then((response) => {
       if (response.status === 200) {
-        console.log(response.message);
+        message.success(response.message, 3);
+        history.push("/login");
       } else if (response.status >= 400) {
-        console.error(response.message);
+        setUsername("");
+        setPassword("");
+        message.error(response.message, 3);
       }
     });
   };
 
   return (
-    <div>
-      <form onSubmit={postRegistration}>
-        <label htmlFor="username">Username: </label>
-        <input
-          type="text"
-          name="username"
-          placeholder="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <label htmlFor="password">Password: </label>
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Sign Up</button>
-      </form>
+    <React.Fragment>
+      <Form onFinish={postRegistration}>
+        <Form.Item label="Username: ">
+          <Input
+            type="text"
+            name="username"
+            placeholder="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item label="Password: ">
+          <Input
+            type="password"
+            name="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Item>
+        <Button htmlType="submit" type="primary">
+          Sign Up
+        </Button>
+      </Form>
       <Link to="/login">Already have an account?</Link>
-    </div>
+    </React.Fragment>
   );
 }

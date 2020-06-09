@@ -22,12 +22,12 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
       <Router>
-        <Route path="/login">
+        <SansMenuRoute path="/login">
           <Login />
-        </Route>
-        <Route path="/signup">
+        </SansMenuRoute>
+        <SansMenuRoute path="/signup">
           <Register />
-        </Route>
+        </SansMenuRoute>
         <PublicRoute exact path="/">
           <Home />
         </PublicRoute>
