@@ -1,14 +1,24 @@
-# RENO EXPO
+# RENO EXPO Books
 
-A React, Node, Express, Postgres starter kit, with Sequelize for an ORM and JWT auth.
+A React, Node, Express, Postgres app, with Sequelize for an ORM and JWT auth, and Ant Design for styles. A demo of [https://github.com/jacksonbates/reno-expo](Reno Expo) used to complete the [freeCodeCamp Personal Library Project](https://www.freecodecamp.org/learn/information-security-and-quality-assurance/information-security-and-quality-assurance-projects/personal-library)
 
-## Why, what is this for?
+## Introduction
 
-Often when I want to spin up a quick project, I get bogged down in boring implementation details such as which stack to use or how to handle authentication.
+This project was built on top of the Reno Expo Starter kit. If you are unfamiliar with it, read the [README.md](https://github.com/JacksonBates/reno-expo/blob/master/README.md) at the Reno Expo repo.
 
-This is designed to minimise the friction for me personally getting started with a project, using a handful of technologies I like and having already implemented the basics for authentication with JWT.
+The rest of this document assumes familiarity with Reno Expo and will only detail the modifications made to that starter kit.
 
-It's not designed with production use cases in mind...but with a bit of rigour and care, there's no reason a project started with this kit couldn't do some heavy lifting.
+After the modifications section, most of this document mirrors the README.md from Reno Expo. Relevant portions are repeated for your convenience, but can be ignored if yo already know how to spin up and deploy Reno Expo - the process is the same.
+
+## Modifications
+
+### Implements Ant Design
+
+The main difference you can see immediately is the use of the Ant Design component library for React for styling.
+
+Some new Layout components have been included to provide styled routes. `layouts/AppLayout.js` is available on public and private client routes and provides the Ant Design `<Sider>`, `<Content>`, and `<Footer>` components. `layouts/SansMenuLayout.js` is available for pages such as Login and Register, or anything else that requires neither authentication or the side menu.
+
+Login and Registration now use the `<Form>` and associated components provided by Ant Design, so the implementation is slightly different to the minimally style vanilla HTML versions. Console logging has been replaced or augmented with Ant Design's `message` method to provide simple feedback toasts.
 
 ## Usage
 
@@ -37,7 +47,9 @@ look at their documentation.
 
 - [Express](https://expressjs.com/en/4x/api.html)
 
-### Quick start
+- [Ant Design](https://ant.design/docs/react/introduce)
+
+### Quick start (The same as the original Reno Expo)
 
 TL;DR: just the commands
 
@@ -58,13 +70,6 @@ npm start
 
 Once the project has been initialised, you may find it more useful to use the `npm run dev` command from the root folder, which will spin up the server and client concurrently.
 
-#### Explanation
-
-The backend is a Node server which can be launched with npm start in the root directory.
-The frontend is a create-react-app which can be launched from the client folder.
-
-The `npx sequlize-cli` commands initialize the database with the user model.
-
 ### Check that it works
 
 In your browser of choice, visit localhost:3000 and you should see a very basic
@@ -82,35 +87,6 @@ Note: there is no client side validation or visual feedback for errors - errors
 live in the dev console. This was left unimplemented so that you can use whatever
 CSS framework you want to plug in without having to unpick any decisions I'd
 made on your behalf.
-
-### Development considerations
-
-#### Backend - Migrations
-
-Changes to the database should be handled through
-[migrations](https://sequelize.org/v5/manual/migrations.html).
-
-The cli command for new migrations is:
-
-`npx sequelize-cli model:generate --name User --attributes username:string,password:string`
-
-This will create the new model and database migration. Read the docs for more details.
-
-For migrations to take effect, you need to run the migrations: `npx sequelize-cli db:migrate`
-
-#### Client - API calls
-
-API calls are demonstrated in the `Login.js`, `Register.js`, and `Admin.js` components. Three helper functions are provided in `src/helpers/api/` that can be used throughout the React app. They are demonstrated in `useEffect` hooks. The `API` helper function provides a lightweight wrapper around `fetch` and takes two arguments: an object containing `{endpoint, method, data}`, and the `authTokens`. Since it returns the fetch response, it is thenable, i.e. you can call the api and set the state like this at its most simple:
-
-```js
-useEffect(() => {
-  // Note method and data have default values,
-  // so empty GET requests only require an endpoint
-  const endpoint = "/api/test/user";
-
-  API({ endpoint }, authTokens).then((response) => setData(response));
-}, [data, authTokens]);
-```
 
 ## Deployment
 
@@ -170,11 +146,3 @@ Using environment "production".
 ```
 
 Now the app should be functional enough to allow you to register a user and login as that user.
-
-## Examples
-
-The basic version can be found at http://renoexpo.herokuapp.com
-
-A more developed app built using Reno Expo will be online soon.
-
-If you use Reno Expo to kick off a project, I would love to hear about it.
