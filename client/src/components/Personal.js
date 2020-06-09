@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/auth";
 import { API } from "../helpers/api";
 
-export default function Admin() {
+export default function Personal() {
   const { authTokens } = useAuth();
 
   const [data, setData] = useState([]);

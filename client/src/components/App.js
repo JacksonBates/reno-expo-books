@@ -3,9 +3,10 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { PrivateRoute, PublicRoute, SansMenuRoute } from "./routes";
 import { AuthContext } from "../context/auth";
 
-import Admin from "./Admin";
 import Home from "./Home";
 import Login from "./Login";
+import Personal from "./Personal";
+import Public from "./Public";
 import Register from "./Register";
 
 import "../styles/App.css";
@@ -31,8 +32,11 @@ export default function App() {
         <PublicRoute exact path="/">
           <Home />
         </PublicRoute>
-        <PrivateRoute path="/admin">
-          <Admin />
+        <PublicRoute exact path="/public">
+          <Public />
+        </PublicRoute>
+        <PrivateRoute path="/personal">
+          <Personal />
         </PrivateRoute>
       </Router>
     </AuthContext.Provider>

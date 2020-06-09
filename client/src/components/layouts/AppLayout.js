@@ -24,11 +24,16 @@ export default function AppLayout(props) {
             </Link>
           </Menu.Item>
           <Menu.Item key="2">
-            <Link to={"/admin"}>
-              <span className="nav-text">Admin</span>
+            <Link to={"/personal"}>
+              <span className="nav-text">Personal Library</span>
             </Link>
           </Menu.Item>
           <Menu.Item key="3">
+            <Link to={"/public"}>
+              <span className="nav-text">Public Library</span>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="4">
             <Link to={"/login"} onClick={logout}>
               <span className="nav-text">Log out</span>
             </Link>
