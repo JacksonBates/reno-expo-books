@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { register } from "../helpers/api";
-import { Button, Form, Input, message } from "antd";
+import { Button, Form, Input, message, Typography } from "antd";
 
 export default function Register() {
   const history = useHistory();
@@ -23,6 +23,7 @@ export default function Register() {
 
   return (
     <React.Fragment>
+      <Typography.Title level={1}>Register</Typography.Title>
       <Form onFinish={postRegistration}>
         <Form.Item label="Username: ">
           <Input
@@ -42,9 +43,11 @@ export default function Register() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Item>
-        <Button htmlType="submit" type="primary">
-          Sign Up
-        </Button>
+        <Form.Item>
+          <Button htmlType="submit" type="primary">
+            Register
+          </Button>
+        </Form.Item>
       </Form>
       <Link to="/login">Already have an account?</Link>
     </React.Fragment>

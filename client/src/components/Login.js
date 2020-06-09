@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, Redirect, useHistory } from "react-router-dom";
-import { Button, Form, Input, message } from "antd";
+import { Button, Form, Input, message, Typography } from "antd";
 import { useAuth } from "../context/auth";
 import { login } from "../helpers/api";
 
@@ -33,6 +33,7 @@ export default function Login(props) {
 
   return (
     <React.Fragment>
+      <Typography.Title level={1}>Login</Typography.Title>
       <Form onFinish={postLogin}>
         <Form.Item label="Username: ">
           <Input
@@ -54,7 +55,7 @@ export default function Login(props) {
         </Form.Item>
         <Form.Item>
           <Button htmlType="submit" type="primary">
-            Sign In
+            Login
           </Button>
         </Form.Item>
       </Form>
