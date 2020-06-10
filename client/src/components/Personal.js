@@ -11,7 +11,7 @@ export default function Personal() {
     API({ endpoint: "/api/test/user" }, authTokens).then((response) =>
       setData(response)
     );
-  }, [data, authTokens]);
+  }, [authTokens]);
 
   return (
     <React.Fragment>
