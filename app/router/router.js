@@ -19,14 +19,13 @@ module.exports = function (app) {
   // freeCodeCamp Personal Library API endpoints
 
   app.get("/api/books", booksController.getBooks);
-  // app.get("/api/books/{id}", controller.getBook);
+  app.get("/api/books/:id", booksController.getBook);
   app.post("/api/books", booksController.postBook);
-  // app.post("/api/books/{id}", controller.postComment);
+  app.post("/api/books/:id", booksController.postComment);
   app.delete("/api/books", booksController.deleteBooks);
-  // app.delete("/api/books/{id}", controller.deleteBook);
+  app.delete("/api/books/:id", booksController.deleteBook);
 
-  //TODO: create the controller actions (maybe in bookController?)
-  // and the migrations necessary to store the books and comments
+  //TODO: create the remaining controller actions
 
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname + "/client/build/index.html"));

@@ -4,12 +4,21 @@ module.exports = (sequelize, DataTypes) => {
     "BookComment",
     {
       comment: DataTypes.TEXT,
+      bookId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: "Books",
+          key: "id",
+        },
+      },
     },
     {}
   );
   BookComment.associate = function (models) {
     // associations can be defined here
-    BookComment.belongsTo(models.Book);
+    BookComment.belongsTo(models.Book, {
+      foreignKey: "bookId",
+    });
   };
   return BookComment;
 };

@@ -9,7 +9,10 @@ module.exports = (sequelize, DataTypes) => {
   );
   Book.associate = function (models) {
     // associations can be defined here
-    Book.hasMany(models.BookComment, { onDelete: "cascade" });
+    Book.hasMany(models.BookComment, {
+      onDelete: "cascade",
+      foreignKey: "bookId",
+    });
   };
   return Book;
 };
