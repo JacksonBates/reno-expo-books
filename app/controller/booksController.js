@@ -19,7 +19,7 @@ exports.getBooks = (req, res) => {
       model: BookComment,
       attributes: [],
     },
-    group: ["BookComments.id", "Book.id"],
+    group: ["Book.id"],
   })
     .then((data) => res.status(200).json(data))
     .catch((error) => res.send(error));

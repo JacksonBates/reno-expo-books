@@ -7,6 +7,10 @@ export function API({ endpoint = "", method = "GET", data = {} }, authTokens) {
       Authorization: `Bearer ${authTokens}`,
     },
   };
+  if (method === "POST" || method === "PUT" || method === "PATCH") {
+    config.body = JSON.stringify(data);
+  }
+
   return fetch(endpoint, config)
     .then((response) => {
       return response.json();

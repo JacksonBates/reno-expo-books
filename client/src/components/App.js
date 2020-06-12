@@ -7,6 +7,7 @@ import Home from "./Home";
 import Login from "./Login";
 import Personal from "./Personal";
 import Public from "./Public";
+import PublicComment from "./PublicComment";
 import Register from "./Register";
 
 import "../styles/App.css";
@@ -34,6 +35,9 @@ export default function App() {
         </PublicRoute>
         <PublicRoute exact path="/public">
           <Public />
+        </PublicRoute>
+        <PublicRoute exact path="/public/book/:id">
+          <PublicComment />
         </PublicRoute>
         <PrivateRoute path="/personal">
           <Personal />
