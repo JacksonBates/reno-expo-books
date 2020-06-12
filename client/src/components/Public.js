@@ -19,8 +19,14 @@ export default function Public() {
     });
   };
 
+  const handleDeleteAll = () => {
+    API({ endpoint: "/api/books", method: "DELETE" }).then(() => {
+      message.success("All books deleted", 3);
+      setFetch(!fetch);
+    });
+  };
+
   const handleSubmit = (e) => {
-    e.preventDefault();
     API({ endpoint: "api/books", method: "POST", data: { title: book } }).then(
       () => {
         message.success("Book added", 3);
@@ -57,7 +63,7 @@ export default function Public() {
   return (
     <React.Fragment>
       <Typography.Title level={1}>Public Library</Typography.Title>
-      <Form>
+      <Form onFinish={handleSubmit}>
         <Form.Item label="Add a book: ">
           <Input value={book} onChange={(e) => setBook(e.target.value)} />
         </Form.Item>
@@ -65,7 +71,7 @@ export default function Public() {
           <Button
             type="primary"
             ghost
-            onClick={(e) => handleSubmit(e)}
+            onClick={handleSubmit}
             style={{ float: "right" }}
           >
             Add book
@@ -77,6 +83,10 @@ export default function Public() {
         columns={columns}
         rowKey={columns[0].key}
       />
+
+      <Button type="danger" block onClick={handleDeleteAll}>
+        Delete All Books
+      </Button>
     </React.Fragment>
   );
 }
