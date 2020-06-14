@@ -7,6 +7,7 @@ import Home from "./Home";
 import Login from "./Login";
 import Personal from "./Personal";
 import Public from "./Public";
+import PersonalComment from "./PersonalComment";
 import PublicComment from "./PublicComment";
 import Register from "./Register";
 
@@ -39,8 +40,11 @@ export default function App() {
         <PublicRoute exact path="/public/book/:id">
           <PublicComment />
         </PublicRoute>
-        <PrivateRoute path="/personal">
+        <PrivateRoute exact path="/personal">
           <Personal />
+        </PrivateRoute>
+        <PrivateRoute exact path="/personal/book/:id">
+          <PersonalComment />
         </PrivateRoute>
       </Router>
     </AuthContext.Provider>

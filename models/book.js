@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "cascade",
       foreignKey: "bookId",
     });
+    Book.belongsTo(models.User, {
+      foreignKey: "userId",
+    });
   };
   return Book;
 };

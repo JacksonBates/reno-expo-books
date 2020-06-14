@@ -11,9 +11,7 @@ module.exports = function (app) {
     [verifySignUp.checkDuplicateUserNameOrEmail],
     controller.signup
   );
-
   app.post("/api/auth/signin", controller.signin);
-
   app.get("/api/test/user", [authJwt.verifyToken], controller.userContent);
 
   // freeCodeCamp Personal Library API endpoints
@@ -26,6 +24,39 @@ module.exports = function (app) {
   app.delete("/api/books/:id", booksController.deleteBook);
 
   //TODO: create the remaining controller actions
+
+  app.get(
+    "/api/user/books",
+    [authJwt.verifyToken],
+    booksController.getUserBooks
+  );
+  app.get(
+    "/api/user/books/:id",
+    [authJwt.verifyToken],
+    booksController.getUserBook
+  );
+  app.post(
+    "/api/user/books",
+    [authJwt.verifyToken],
+    booksController.postUserBook
+  );
+  app.post(
+    "/api/user/books/:id",
+    [authJwt.verifyToken],
+    booksController.postUserComment
+  );
+  app.delete(
+    "/api/user/books",
+    [authJwt.verifyToken],
+    booksController.deleteUserBooks
+  );
+  app.delete(
+    "/api/user/books/:id",
+    [authJwt.verifyToken],
+    booksController.deleteUserBook
+  );
+
+  // Fallback route to render react app
 
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname + "/client/build/index.html"));

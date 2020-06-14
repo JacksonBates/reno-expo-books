@@ -69,6 +69,7 @@ exports.userContent = (req, res) => {
       res.status(200).json({
         description: "User Content Page",
         user: user,
+        userId: req.userId,
       });
     })
     .catch((err) => {
