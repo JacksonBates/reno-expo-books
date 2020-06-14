@@ -20,9 +20,36 @@ Some new Layout components have been included to provide styled routes. `layouts
 
 Login and Registration now use the `<Form>` and associated components provided by Ant Design, so the implementation is slightly different to the minimally style vanilla HTML versions. Console logging has been replaced or augmented with Ant Design's `message` method to provide simple feedback toasts.
 
-## Usage
+### Makes some Database modifications with migrations
 
-NB: _These notes are rough!_ And this project is still under development.
+This project extends the original Reno Expo with 4 databse migrations:
+
+1. create book
+2. create book comment
+3. adds userId to books
+4. adds fk userId to books
+
+The naming of these migrations should make it clear what is happening, but it's worth reviewing these files to examine how the database is being altered.
+
+In tandem with this, the `user.js` model has been modified with the hasMany association:
+
+```
+User.associate = function (models) {
+    // associations can be defined here
+    User.hasMany(models.Book, {
+      onDelete: "cascade",
+      foreignKey: "userId",
+    });
+  };
+```
+
+That is, a User can have many books associated with it, linked via the foreign key 'userId' on the books table. When the User is deleted, this action 'cascades', meaning all associated books will be deleted also.
+
+You can see similar models for `book.js` and `bookComment.js`, which define similar assocatitions.
+
+The bookController contains the methods referenced by the endpoints in `router/router.js`. These show examples for getting, posting and deleting books on both public and private routes.
+
+## Usage
 
 ### Requirements
 
