@@ -1,6 +1,6 @@
 # RENO EXPO Books
 
-A React, Node, Express, Postgres app, with Sequelize for an ORM and JWT auth, and Ant Design for styles. A demo of [https://github.com/jacksonbates/reno-expo](Reno Expo) used to complete the [freeCodeCamp Personal Library Project](https://www.freecodecamp.org/learn/information-security-and-quality-assurance/information-security-and-quality-assurance-projects/personal-library)
+A React, Node, Express, Postgres app, with Sequelize for an ORM and JWT auth, and Ant Design for styles. A demo of [Reno Expo](https://github.com/jacksonbates/reno-expo) used to complete the [freeCodeCamp Personal Library Project](https://www.freecodecamp.org/learn/information-security-and-quality-assurance/information-security-and-quality-assurance-projects/personal-library)
 
 ## Introduction
 
