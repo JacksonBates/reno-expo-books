@@ -8,7 +8,7 @@ This project was built on top of the Reno Expo Starter kit. If you are unfamilia
 
 The rest of this document assumes familiarity with Reno Expo and will only detail the modifications made to that starter kit.
 
-After the modifications section, most of this document mirrors the README.md from Reno Expo. Relevant portions are repeated for your convenience, but can be ignored if yo already know how to spin up and deploy Reno Expo - the process is the same.
+After the modifications section, most of this document mirrors the README.md from Reno Expo. Relevant portions are repeated for your convenience, but can be ignored if you already know how to spin up and deploy Reno Expo - the process is the same.
 
 ## Modifications
 
